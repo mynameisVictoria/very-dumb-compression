@@ -6,7 +6,7 @@ void deleteAtIndex(char *str, int index) {
         str[i] = str[i + 1];
     }
 }
-
+//test
 int charecterInRowCheck(char str[], int index, char repeatChar) {
 
     int consectuiveCount = 0;
