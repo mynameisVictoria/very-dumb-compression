@@ -1,26 +1,43 @@
 #include <stdio.h>
+#include <string.h>
 
-int charecterInRowCheck(char str[], int index, char repeatChar) {
-    int counter = 0;
-    while (1) {
-        if (str[index + counter] == repeatChar) {
-            counter++;
-        }
-        else {
-            return counter;
-        }
+void deleteAtIndex(char *str, int index) {
+    for (int i = index; str[i] != '\0'; i++) {
+        str[i] = str[i + 1];
     }
 }
 
+int charecterInRowCheck(char str[], int index, char repeatChar) {
+
+    int consectuiveCount = 0;
+    int indexCounter = index;
+    while (1){
+        if (str[indexCounter] == repeatChar) {
+            consectuiveCount++;
+            indexCounter++;
+        }
+        else {
+            while (indexCounter - consectuiveCount < consectuiveCount) {
+                deleteAtIndex(str, indexCounter);
+            }
+            return consectuiveCount;
+            }
+        }
+    }
+
 int main() {
-    char str[] = "Hellllloasdfgh";
+    char str[] = "yyyyyy";
 
     for (int i = 0; str[i] != '\0'; i++) {
         if (str[i] == str[i - 1]) {
-            printf("%d \n", charecterInRowCheck(str, i, str[i]) + 1);
+            int repeatCharAmount = charecterInRowCheck(str, i, str[i]);
+            char repeatChar[2];
+            sprintf(repeatChar, "%d", repeatCharAmount);
+            str[i] = repeatChar[0];
         }
-        printf("Character at index %d is %c\n", i, str[i]);
     }
+
+    printf("%s\n", str);
 
     return 0;
 }
